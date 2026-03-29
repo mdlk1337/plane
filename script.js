@@ -44,7 +44,7 @@ function startPlane() {
         
         if(boxY === 800) {
             clearInterval(a)
-            setTimeout(dropBox, 100000);
+            setTimeout(dropBox, 10000000);
             boxY = 150
         }
     }, 1)
