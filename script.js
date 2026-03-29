@@ -44,10 +44,14 @@ function startPlane() {
         
         if(boxY === 800) {
             clearInterval(a)
-            setTimeout(dropBox, 10000000);
             boxY = 150
-        }
+
+            // let timerId = setTimeout(a, 100000);
+            // boxY = 150
+            // clearTimeout(timerId)
+        } 
     }, 1)
+    
 }
 
 
