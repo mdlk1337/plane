@@ -1,13 +1,17 @@
- const plane = document.querySelector(".plane");
- const box = document.querySelector(".box")
+const plane = document.querySelector(".plane");
+const box = document.querySelector(".box")
+const button = document.querySelector(".startplane")
 
 let stepPlane = 0;
 let widthWindow = window.innerWidth;
 let isRight = true 
 let boxY = 150;
 
+let planeTimer = null;
+let boxTimer = null;
+
 function startPlane() {
-     setInterval(() => {
+      planeTimer = setInterval(() => {
         if(isRight) {
             stepPlane++;
 
@@ -38,22 +42,38 @@ function startPlane() {
 
  function dropBox() {
     
-     let a = setInterval(() => {
+    boxTimer = setInterval(() => {
         boxY++
         box.style.top = boxY + 'px'
         
         if(boxY === 800) {
-            clearInterval(a)
-            boxY = 150
-
-            // let timerId = setTimeout(a, 100000);
-            // boxY = 150
-            // clearTimeout(timerId)
+            clearInterval(boxTimer);
+            boxY = 150;
         } 
     }, 1)
     
 }
 
 
-startPlane()
+
+let isStart = false;
+
+button.addEventListener('click', () => {
+    if(!isStart) {
+        button.textContent = "Stop";
+        isStart = true;
+        startPlane()
+    }else {
+        isStart = false;
+        button.textContent = "Start";
+        stepPlane = 0;
+        plane.style.left = stepPlane;
+        clearInterval(planeTimer);
+        clearInterval(boxTimer);
+        boxY = 150;
+        box.style.display = 'none';
+        plane.style.transform = "scaleX(-1)";
+        isRight = true;
+    }
+})
 
